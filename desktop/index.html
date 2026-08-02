@@ -133,37 +133,37 @@
   </div>
 
 <script>
-/* 30 条 APOD 双语数据（同好社合集 2026-06-23），已过滤视频(.mp4)与网页(.html) */
+/* 15 张精选 NASA 深空影像（星云 / 星系 / 超新星遗迹），直链均指向原图、已核对天体名与分辨率 */
 const DATA = [
-  {en:"Andromeda Galaxy",cn:"仙女座星系 M31",date:"2003-12-10",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg"},
+  {en:"Andromeda Galaxy",cn:"仙女座星系 M31",date:"2003-12-10",credit:"NASA/JPL/California Institute of Technology",img:"https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg"},
 
-  {en:"Sombrero Galaxy",cn:"草帽星系 M104",date:"2012-04-24",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA07899/PIA07899~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA07899/PIA07899~orig.jpg"},
+  {en:"Sombrero Galaxy",cn:"草帽星系 M104",date:"2005-05-04",credit:"NASA/JPL-Caltech/University of Arizona;<br .>Figures 1 and 2: NASA/JPL-Caltech/University of Arizona/STScI;<br .>Figure 3: NASA/STScI/AURA;<br .>Animation: NASA/JPL-Caltech/University of Arizona/STScI",img:"https://images-assets.nasa.gov/image/PIA07899/PIA07899~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA07899/PIA07899~orig.jpg"},
 
-  {en:"Cosmic Cliffs (Carina)",cn:"船底座星云·宇宙峭壁",date:"2022-07-12",credit:"NASA / ESA / CSA / STScI",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000720/GSFC_20171208_Archive_e000720~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000720/GSFC_20171208_Archive_e000720~orig.jpg"},
+  {en:"Cosmic Cliffs (Carina)",cn:"船底座星云·宇宙峭壁",date:"2022-07-12",credit:"STScI (Webb)",img:"https://images-assets.nasa.gov/image/carina_nebula/carina_nebula~orig.png",url:"https://images-assets.nasa.gov/image/carina_nebula/carina_nebula~orig.png"},
 
-  {en:"Eagle Nebula",cn:"鹰状星云（创生之柱）",date:"2022-11-11",credit:"NASA / JPL-Caltech",img:"https://images-assets.nasa.gov/image/PIA25433/PIA25433~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA25433/PIA25433~orig.jpg"},
+  {en:"Eagle Nebula",cn:"鹰状星云（创生之柱）",date:"2022-11-11",credit:"NASA/JPL-Caltech",img:"https://images-assets.nasa.gov/image/PIA25433/PIA25433~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA25433/PIA25433~orig.jpg"},
 
-  {en:"Orion Nebula",cn:"猎户座大星云 M42",date:"2022-11-22",credit:"NASA / JPL-Caltech",img:"https://images-assets.nasa.gov/image/PIA25434/PIA25434~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA25434/PIA25434~orig.jpg"},
+  {en:"Orion Nebula",cn:"猎户座大星云 M42",date:"2022-11-22",credit:"ESA/NASA/JPL-Caltech",img:"https://images-assets.nasa.gov/image/PIA25434/PIA25434~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA25434/PIA25434~orig.jpg"},
 
-  {en:"Tarantula Nebula",cn:"蜘蛛星云",date:"2004-01-13",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000226/GSFC_20171208_Archive_e000226~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000226/GSFC_20171208_Archive_e000226~orig.jpg"},
+  {en:"Tarantula Nebula",cn:"蜘蛛星云",date:"2012-04-17",credit:"X-ray: NASA/CXC/PSU/L.Townsley et al.; Optical: NASA/STScI; Infrared: NASA/JPL/PSU/L.Townsley et al.",img:"https://images-assets.nasa.gov/image/PIA14415/PIA14415~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA14415/PIA14415~orig.jpg"},
 
-  {en:"Lagoon Nebula",cn:"礁湖星云 M8",date:"2011-09-16",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA24577/PIA24577~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA24577/PIA24577~orig.jpg"},
+  {en:"Lagoon Nebula",cn:"礁湖星云 M8",date:"2017-12-08",credit:"GSFC",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001955/GSFC_20171208_Archive_e001955~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001955/GSFC_20171208_Archive_e001955~orig.jpg"},
 
-  {en:"Whirlpool Galaxy",cn:"涡状星系 M51",date:"2019-06-26",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA23128/PIA23128~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA23128/PIA23128~orig.jpg"},
+  {en:"Whirlpool Galaxy",cn:"涡状星系 M51",date:"2017-12-08",credit:"GSFC",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001925/GSFC_20171208_Archive_e001925~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001925/GSFC_20171208_Archive_e001925~orig.jpg"},
 
-  {en:"Triangulum Galaxy",cn:"三角座星系 M33",date:"2022-06-16",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA25165/PIA25165~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA25165/PIA25165~orig.jpg"},
+  {en:"Triangulum Galaxy",cn:"三角座星系 M33",date:"2009-04-03",credit:"NASA/JPL-Caltech/Univ. of Ariz.",img:"https://images-assets.nasa.gov/image/PIA11969/PIA11969~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA11969/PIA11969~orig.jpg"},
 
-  {en:"Pinwheel Galaxy",cn:"风车星系 M101",date:"2011-07-21",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000097/GSFC_20171208_Archive_e000097~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000097/GSFC_20171208_Archive_e000097~orig.jpg"},
+  {en:"Pinwheel Galaxy",cn:"风车星系 M101",date:"2011-07-21",credit:"NASA/JPL-Caltech/UCLA",img:"https://images-assets.nasa.gov/image/PIA14403/PIA14403~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA14403/PIA14403~orig.jpg"},
 
-  {en:"Horsehead Nebula",cn:"马头星云",date:"1999-12-01",credit:"JPL/NASA, NOAO, ESA and The Hubble Heritage Team, STScI/AURA",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001518/GSFC_20171208_Archive_e001518~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001518/GSFC_20171208_Archive_e001518~orig.jpg"},
+  {en:"Horsehead Nebula",cn:"马头星云",date:"2017-12-08",credit:"GSFC",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001518/GSFC_20171208_Archive_e001518~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001518/GSFC_20171208_Archive_e001518~orig.jpg"},
 
-  {en:"Rosette Nebula",cn:"玫瑰星云",date:"2007-04-18",credit:"NASA/JPL-Caltech/Univ. of Ariz.",img:"https://images-assets.nasa.gov/image/PIA09266/PIA09266~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA09266/PIA09266~orig.jpg"},
+  {en:"Rosette Nebula",cn:"玫瑰星云",date:"2010-08-25",credit:"NASA/JPL-Caltech/UCLA",img:"https://images-assets.nasa.gov/image/PIA13126/PIA13126~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA13126/PIA13126~orig.jpg"},
 
-  {en:"Veil Nebula",cn:"面纱星云",date:"2012-03-08",credit:"NASA/JPL-Caltech/University of Wisconsin",img:"https://images-assets.nasa.gov/image/PIA15413/PIA15413~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA15413/PIA15413~orig.jpg"},
+  {en:"Veil Nebula",cn:"面纱星云（天鹅座环）",date:"2012-03-22",credit:"NASA/JPL-Caltech",img:"https://images-assets.nasa.gov/image/PIA15415/PIA15415~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA15415/PIA15415~orig.jpg"},
 
-  {en:"Bubble Nebula",cn:"气泡星云",date:"2010-05-24",credit:"NASA/JPL-Caltech/UCLA",img:"https://images-assets.nasa.gov/image/PIA13112/PIA13112~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA13112/PIA13112~orig.jpg"},
+  {en:"Bubble Nebula",cn:"气泡星云",date:"2017-12-08",credit:"GSFC",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002039/GSFC_20171208_Archive_e002039~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002039/GSFC_20171208_Archive_e002039~orig.jpg"},
 
-  {en:"Trifid Nebula",cn:"三叶星云",date:"1999-12-02",credit:"2MASS",img:"https://images-assets.nasa.gov/image/PIA07225/PIA07225~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA07225/PIA07225~orig.jpg"}
+  {en:"Trifid Nebula",cn:"三叶星云",date:"2014-01-29",credit:"NASA/JPL-Caltech/UCLA",img:"https://images-assets.nasa.gov/image/PIA17834/PIA17834~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA17834/PIA17834~orig.jpg"}
 ];
 
 const DUR = 9000;
