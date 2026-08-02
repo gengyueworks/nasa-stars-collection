@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NASA 星辰桌面 · Stars Desktop</title>
+<style>
+  :root{
+    --fg:#eef2f8;
+    --dim:rgba(238,242,248,.66);
+    --faint:rgba(238,242,248,.38);
+    --accent:#7fb0ff;
+    --dur:9s;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#04060d;overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    color:var(--fg);-webkit-font-smoothing:antialiased;cursor:default}
+
+  /* 常驻星空背景（图片加载间隙也不空） */
+  #sky{position:fixed;inset:0;z-index:0;display:block}
+
+  /* 双图层交叉淡入 */
+  #stage{position:fixed;inset:0;z-index:1}
+  .layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity 1.5s ease;will-change:opacity,transform;
+    transform:scale(1.04);filter:saturate(1.05) contrast(1.02)}
+  .layer.show{opacity:1}
+  .layer.kb{animation:kenburns var(--dur) linear forwards}
+  @keyframes kenburns{
+    from{transform:scale(1.06) translate(0,0)}
+    to{transform:scale(1.16) translate(-1.6%,-1.1%)}
+  }
+
+  /* 电影感：底部压暗 + 暗角 */
+  #scrim{position:absolute;inset:0;pointer-events:none;z-index:2;
+    background:
+      radial-gradient(130% 100% at 50% 0%,rgba(0,0,0,0) 55%,rgba(0,0,0,.45) 100%),
+      linear-gradient(to top,rgba(2,4,10,.82) 0%,rgba(2,4,10,.30) 24%,rgba(2,4,10,0) 50%)}
+  #vignette{position:fixed;inset:0;pointer-events:none;z-index:3;
+    box-shadow:inset 0 0 240px 40px rgba(0,0,0,.55)}
+
+  /* 顶部：水印 + 实时时钟 */
+  #mark{position:fixed;top:20px;left:24px;z-index:5;font-size:11.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--faint);user-select:none;pointer-events:none}
+  #clock{position:fixed;top:18px;right:24px;z-index:5;text-align:right;user-select:none;
+    pointer-events:none;color:var(--dim);text-shadow:0 1px 14px rgba(0,0,0,.6)}
+  #clock .t{font-size:26px;font-weight:300;letter-spacing:.04em;font-variant-numeric:tabular-nums;
+    color:var(--fg);line-height:1}
+  #clock .d{font-size:11.5px;letter-spacing:.14em;margin-top:5px;text-transform:uppercase}
+
+  /* 底部说明：玻璃拟态卡，图大字少 */
+  #caption{position:fixed;left:24px;bottom:26px;z-index:5;max-width:min(680px,72vw);
+    padding:15px 18px 16px;border-radius:15px;
+    background:rgba(10,15,28,.34);backdrop-filter:blur(15px) saturate(150%);
+    -webkit-backdrop-filter:blur(15px) saturate(150%);
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 12px 40px rgba(0,0,0,.45);
+    opacity:0;transform:translateY(10px);
+    transition:opacity .7s ease .25s,transform .7s ease .25s}
+  #caption.show{opacity:1;transform:translateY(0)}
+  #en{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+  #cn{font-size:22px;font-weight:500;line-height:1.32;color:var(--fg);
+    text-shadow:0 1px 20px rgba(0,0,0,.55)}
+  #meta{margin-top:10px;font-size:12px;color:var(--dim)}
+  #meta a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(127,176,255,.4)}
+  #meta a:hover{border-bottom-color:var(--accent)}
+
+  #count{position:fixed;right:24px;bottom:30px;z-index:5;font-size:11.5px;color:var(--faint);
+    letter-spacing:.12em;user-select:none}
+
+  /* 进度条 */
+  #bar{position:fixed;left:0;bottom:0;height:3px;width:0;z-index:6;
+    background:linear-gradient(90deg,rgba(127,176,255,.35),var(--accent));
+    box-shadow:0 0 12px rgba(127,176,255,.6);opacity:.9}
+  #bar.run{animation:prog var(--dur) linear forwards}
+  #bar.paused{animation-play-state:paused}
+  @keyframes prog{from{width:0}to{width:100%}}
+
+  /* 悬停控制条 */
+  #controls{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:7;
+    display:flex;gap:10px;padding:8px 10px;border-radius:999px;
+    background:rgba(10,15,28,.34);backdrop-filter:blur(15px) saturate(150%);
+    -webkit-backdrop-filter:blur(15px) saturate(150%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 34px rgba(0,0,0,.4);
+    opacity:.32;transition:opacity .35s}
+  body:hover #controls{opacity:1}
+  #controls button{all:unset;cursor:pointer;width:38px;height:38px;border-radius:50%;
+    display:grid;place-items:center;color:var(--fg);font-size:15px;
+    transition:background .2s,transform .15s}
+  #controls button:hover{background:rgba(255,255,255,.12);transform:scale(1.06)}
+  #controls button:active{transform:scale(.94)}
+  #controls button.on{color:var(--accent)}
+
+  /* 暂停标记 */
+  #pause{position:fixed;top:54px;right:24px;z-index:5;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--faint);opacity:0;transition:opacity .3s;user-select:none}
+  body.paused #pause{opacity:1}
+  /* 随机标记 */
+  #shuf{position:fixed;top:54px;left:24px;z-index:5;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--faint);opacity:0;transition:opacity .3s;user-select:none}
+  body.shuffle #shuf{opacity:1}
+</style>
+</head>
+<body>
+  <canvas id="sky"></canvas>
+  <div id="stage">
+    <img class="layer" id="a" alt="">
+    <img class="layer" id="b" alt="">
+    <div id="scrim"></div>
+  </div>
+  <div id="vignette"></div>
+
+  <div id="mark">NASA · APOD</div>
+  <div id="clock"><div class="t">--:--</div><div class="d">—</div></div>
+  <div id="pause">⏸ 已暂停</div>
+  <div id="shuf">🔀 随机</div>
+
+  <div id="caption">
+    <div id="en"></div>
+    <div id="cn"></div>
+    <div id="meta"></div>
+  </div>
+  <div id="count"></div>
+  <div id="bar"></div>
+
+  <div id="controls">
+    <button id="prev" title="上一张 (←)">⏮</button>
+    <button id="play" title="播放 / 暂停 (空格)">⏯</button>
+    <button id="next" title="下一张 (→)">⏭</button>
+    <button id="rand" title="随机播放 (S)">🔀</button>
+    <button id="full" title="全屏 (F)">⛶</button>
+  </div>
+
+<script>
+/* 30 条 APOD 双语数据（同好社合集 2026-06-23），已过滤视频(.mp4)与网页(.html) */
+const DATA = [
+  {en:"Andromeda Galaxy",cn:"仙女座星系 M31",date:"2003-12-10",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg"},
+
+
+  {en:"Sombrero Galaxy",cn:"草帽星系 M104",date:"2012-04-24",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA07899/PIA07899~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA07899/PIA07899~orig.jpg"},
+
+
+  {en:"Eagle Nebula",cn:"鹰状星云（创生之柱）",date:"2022-11-11",credit:"NASA / JPL-Caltech",img:"https://images-assets.nasa.gov/image/PIA25433/PIA25433~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA25433/PIA25433~orig.jpg"},
+
+
+  {en:"Orion Nebula",cn:"猎户座大星云 M42",date:"2022-11-22",credit:"NASA / JPL-Caltech",img:"https://images-assets.nasa.gov/image/PIA25434/PIA25434~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA25434/PIA25434~orig.jpg"},
+
+
+  {en:"Crab Nebula",cn:"蟹状星云 M1",date:"2005-12-01",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA03606/PIA03606~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA03606/PIA03606~orig.jpg"},
+
+
+  {en:"Helix Nebula",cn:"螺旋星云（上帝之眼）",date:"2012-05-16",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA15658/PIA15658~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA15658/PIA15658~orig.jpg"},
+
+
+  {en:"Blue Ring Nebula",cn:"蓝环星云",date:"2020-11-18",credit:"NASA / JPL-Caltech",img:"https://images-assets.nasa.gov/image/PIA23867/PIA23867~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA23867/PIA23867~orig.jpg"},
+
+
+  {en:"Flame Nebula",cn:"火焰星云（猎户座）",date:"2010-12-02",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA13448/PIA13448~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA13448/PIA13448~orig.jpg"},
+
+
+  {en:"Tarantula Nebula",cn:"蜘蛛星云",date:"2004-01-13",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000226/GSFC_20171208_Archive_e000226~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000226/GSFC_20171208_Archive_e000226~orig.jpg"},
+
+
+  {en:"California Nebula",cn:"加利福尼亚星云",date:"2010-05-07",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA13108/PIA13108~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA13108/PIA13108~orig.jpg"},
+
+
+  {en:"Lagoon Nebula",cn:"礁湖星云 M8",date:"2011-09-16",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA24577/PIA24577~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA24577/PIA24577~orig.jpg"},
+
+
+  {en:"Southern Ring Nebula",cn:"南环星云 NGC 3132",date:"2022-07-12",credit:"NASA / ESA / CSA / STScI",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002039/GSFC_20171208_Archive_e002039~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002039/GSFC_20171208_Archive_e002039~orig.jpg"},
+
+
+  {en:"Whirlpool Galaxy",cn:"涡状星系 M51",date:"2019-06-26",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA23128/PIA23128~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA23128/PIA23128~orig.jpg"},
+
+
+  {en:"Triangulum Galaxy",cn:"三角座星系 M33",date:"2022-06-16",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA25165/PIA25165~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA25165/PIA25165~orig.jpg"},
+
+
+  {en:"Pinwheel Galaxy",cn:"风车星系 M101",date:"2011-07-21",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000097/GSFC_20171208_Archive_e000097~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000097/GSFC_20171208_Archive_e000097~orig.jpg"},
+
+
+  {en:"Pleiades",cn:"昴星团（七姊妹）",date:"2007-04-16",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA09262/PIA09262~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA09262/PIA09262~orig.jpg"},
+
+
+  {en:"Sculptor Group",cn:"玉夫座星系群",date:"2016-03-07",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000012/GSFC_20171208_Archive_e000012~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000012/GSFC_20171208_Archive_e000012~orig.jpg"},
+
+
+  {en:"Cosmic Cliffs (Carina)",cn:"船底座星云·宇宙峭壁",date:"2022-07-12",credit:"NASA / ESA / CSA / STScI",img:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000720/GSFC_20171208_Archive_e000720~orig.jpg",url:"https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000720/GSFC_20171208_Archive_e000720~orig.jpg"},
+
+
+  {en:"Monkey Head Nebula",cn:"猴头星云 NGC 2174",date:"2015-08-20",credit:"NASA / ESA",img:"https://images-assets.nasa.gov/image/PIA19836/PIA19836~orig.jpg",url:"https://images-assets.nasa.gov/image/PIA19836/PIA19836~orig.jpg"},
+];
+
+const DUR = 9000;
+let idx = 0, paused = false, shuffle = false, timer = null, active = 'a';
+const layers = {a:document.getElementById('a'), b:document.getElementById('b')};
+const caption = document.getElementById('caption');
+const en = document.getElementById('en'), cn = document.getElementById('cn'), meta = document.getElementById('meta');
+const count = document.getElementById('count'), bar = document.getElementById('bar');
+const clockT = document.querySelector('#clock .t'), clockD = document.querySelector('#clock .d');
+
+document.documentElement.style.setProperty('--dur', (DUR/1000)+'s');
+
+/* ---------- 常驻星空背景 ---------- */
+(function starfield(){
+  const c = document.getElementById('sky'), x = c.getContext('2d');
+  let w,h,stars;
+  function build(){
+    w = c.width = innerWidth; h = c.height = innerHeight;
+    const n = Math.min(220, Math.round(w*h/9000));
+    stars = Array.from({length:n}, ()=>({
+      x:Math.random()*w, y:Math.random()*h,
+      r:Math.random()*1.3+0.2,
+      a:Math.random()*0.5+0.2,
+      sp:Math.random()*0.6+0.15,
+      ph:Math.random()*Math.PI*2
+    }));
+  }
+  function draw(t){
+    x.clearRect(0,0,w,h);
+    for(const s of stars){
+      const tw = s.a + Math.sin(t/1000*s.sp + s.ph)*0.22;
+      x.globalAlpha = Math.max(0.05, tw);
+      x.beginPath(); x.arc(s.x,s.y,s.r,0,7); x.fillStyle='#dfe9ff'; x.fill();
+    }
+    x.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+  build(); addEventListener('resize', build); requestAnimationFrame(draw);
+})();
+
+/* ---------- 实时时钟 ---------- */
+const WD = ['周日','周一','周二','周三','周四','周五','周六'];
+function tick(){
+  const d = new Date();
+  const p = n => String(n).padStart(2,'0');
+  clockT.textContent = p(d.getHours())+':'+p(d.getMinutes());
+  clockD.textContent = d.getFullYear()+'.'+p(d.getMonth()+1)+'.'+p(d.getDate())+' '+WD[d.getDay()];
+}
+tick(); setInterval(tick, 1000*15);
+
+/* ---------- 渲染说明 ---------- */
+function render(){
+  const d = DATA[idx];
+  en.textContent = d.en;
+  cn.textContent = d.cn;
+  meta.innerHTML = d.date + ' · 摄影 ' + d.credit +
+    ' · <a href="'+d.url+'" target="_blank" rel="noopener">出处 ↗</a>';
+  count.textContent = (idx+1) + ' / ' + DATA.length;
+  caption.classList.remove('show'); void caption.offsetWidth; caption.classList.add('show');
+}
+
+/* ---------- 切换图片（双图层交叉淡入 + Ken Burns） ---------- */
+function show(i){
+  idx = (i + DATA.length) % DATA.length;
+  const d = DATA[idx];
+  const cur = layers[active], nxt = layers[active==='a'?'b':'a'];
+  const pre = new Image();
+  pre.onload = ()=>{
+    nxt.src = pre.src;
+    nxt.classList.add('show'); cur.classList.remove('show');
+    nxt.classList.remove('kb'); void nxt.offsetWidth; nxt.classList.add('kb');
+    active = active==='a'?'b':'a';
+    render(); restart();
+  };
+  pre.onerror = ()=>{ show(idx+1); };   // 某张挂了跳下一张
+  pre.src = d.img;
+}
+
+function nextIndex(){
+  if(shuffle){ let r; do{ r = Math.floor(Math.random()*DATA.length); }while(r===idx && DATA.length>1); return r; }
+  return idx+1;
+}
+
+function restart(){
+  bar.classList.remove('run','paused'); void bar.offsetWidth;
+  if(!paused) bar.classList.add('run');
+  clearTimeout(timer);
+  if(!paused) timer = setTimeout(()=>show(nextIndex()), DUR);
+}
+
+function toggle(){
+  paused = !paused;
+  document.body.classList.toggle('paused', paused);
+  if(paused){ bar.classList.add('paused'); clearTimeout(timer); }
+  else restart();
+}
+
+function toggleShuffle(){
+  shuffle = !shuffle;
+  document.body.classList.toggle('shuffle', shuffle);
+  document.getElementById('rand').classList.toggle('on', shuffle);
+  restart();
+}
+
+function fullscreen(){
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+
+document.getElementById('prev').onclick = e=>{e.stopPropagation(); show(idx-1);};
+document.getElementById('next').onclick = e=>{e.stopPropagation(); show(nextIndex());};
+document.getElementById('play').onclick = e=>{e.stopPropagation(); toggle();};
+document.getElementById('rand').onclick = e=>{e.stopPropagation(); toggleShuffle();};
+document.getElementById('full').onclick = e=>{e.stopPropagation(); fullscreen();};
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight') show(nextIndex());
+  else if(e.key==='ArrowLeft') show(idx-1);
+  else if(e.key===' '){ e.preventDefault(); toggle(); }
+  else if(e.key==='i'||e.key==='I') window.open(DATA[idx].url,'_blank');
+  else if(e.key==='s'||e.key==='S') toggleShuffle();
+  else if(e.key==='f'||e.key==='F') fullscreen();
+});
+
+document.addEventListener('click', e=>{
+  if(e.target.closest('#controls') || e.target.closest('#meta a')) return;
+  if(e.clientX < innerWidth*0.20) show(idx-1);
+  else if(e.clientX > innerWidth*0.80) show(nextIndex());
+  else toggle();
+});
+
+/* 切到后台标签页时暂停，省电 */
+document.addEventListener('visibilitychange', ()=>{
+  if(document.hidden){ clearTimeout(timer); bar.classList.add('paused'); }
+  else if(!paused) restart();
+});
+
+show(0);
+</script>
+</body>
+</html>
