@@ -1,6 +1,6 @@
 # NASA 星辰星云精选合集 · nasa-stars-collection
 
-> 一个精选的 NASA 公开星空 / 星云 / 深空影像与工具合集，仿 [sindresorhus/awesome](https://github.com/sindresorhus/awesome) 模式。
+> 一个精选的 NASA 公开星空 / 星云 / 深空影像与工具合集（awesome-list 风格精选清单）。
 > 每条 = **英文标题 + 中文一句点评 + 链接**。差异化护城河是**双语点评**。
 
 [English version ↓](#english)
@@ -92,7 +92,7 @@
 
 # English
 
-A curated list of NASA's public-domain stars, nebulae, deep-space imagery, and the tools to use them — in the spirit of [sindresorhus/awesome](https://github.com/sindresorhus/awesome). Every entry is **English title + one-line Chinese note + link**. The differentiator is the **bilingual commentary**.
+A curated list of NASA's public-domain stars, nebulae, deep-space imagery, and the tools to use them. Every entry is **English title + one-line Chinese note + link**. The differentiator is the **bilingual commentary**.
 
 ## What's inside
 
