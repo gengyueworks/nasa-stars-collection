@@ -25,20 +25,21 @@
 
 > 每条直链到 NASA 图片库里**那张具体的图**，点开就是它本身。
 
-- [Eagle Nebula｜鹰状星云（创生之柱）](https://images-assets.nasa.gov/image/PIA25433/PIA25433~orig.jpg) — 鹰状星云里正在诞生恒星的气体巨柱，哈勃和韦伯都拍过，是最出圈的宇宙名场面。
-- [Orion Nebula｜猎户座大星云 M42](https://images-assets.nasa.gov/image/PIA25434/PIA25434~orig.jpg) — 肉眼可见最近的恒星育婴房，冬夜天空里最亮的那团雾，望远镜下是一锅发光的星尘。
-- [Crab Nebula｜蟹状星云 M1](https://images-assets.nasa.gov/image/PIA03606/PIA03606~orig.jpg) — 1054 年那颗被中国天文学家记下的超新星残骸，中心藏着一颗每秒转 30 圈的中子星。
-- [Helix Nebula｜螺旋星云（上帝之眼）](https://images-assets.nasa.gov/image/PIA15658/PIA15658~orig.jpg) — 离我们约 655 光年的「上帝之眼」，一颗濒死恒星把自己吐成了一个环。
-- [California Nebula｜加利福尼亚星云](https://images-assets.nasa.gov/image/PIA13108/PIA13108~orig.jpg) — 轮廓像美国西海岸的发射星云，那抹红光来自被恒星照亮的电离氢。
-- [Lagoon Nebula｜礁湖星云 M8](https://images-assets.nasa.gov/image/PIA14728/PIA14728~orig.jpg) — 人马座方向的恒星托儿所，哈勃拍过它里头像山脉一样的气体褶皱。
-- [Tarantula Nebula｜蜘蛛星云](https://images-assets.nasa.gov/image/PIA05062/PIA05062~orig.jpg) — 大麦哲伦云里最大的恒星育婴房，恒星密度高到能把周围照成白天。
-- [Southern Ring Nebula｜南环星云 NGC 3132](https://images-assets.nasa.gov/image/southern_ring_nebula/southern_ring_nebula~orig.png) — 韦伯首图里那对「八字形」的垂死恒星环，红外波段第一次看清了第二颗星。
-- [Cosmic Cliffs｜船底座星云·宇宙峭壁](https://images-assets.nasa.gov/image/carina_nebula/carina_nebula~orig.png) — 韦伯首图里的「宇宙悬崖」，恒星在气体峭壁后一个接一个破壳而出。
 - [Andromeda Galaxy｜仙女座星系 M31](https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg) — 离银河系最近的大星系，肉眼勉强可见，照片里是上万亿颗恒星的漩涡。
-- [Whirlpool Galaxy｜涡状星系 M51](https://images-assets.nasa.gov/image/PIA23128/PIA23128~orig.jpg) — 教科书般的旋臂星系，正被旁边小星系扯出一道潮汐桥。
-- [Sombrero Galaxy｜草帽星系 M104](https://images-assets.nasa.gov/image/PIA15426/PIA15426~orig.jpg) — 侧向看的旋涡星系，一条暗尘带横在发亮的核心前，像一顶宽檐草帽。
+- [Sombrero Galaxy｜草帽星系 M104](https://images-assets.nasa.gov/image/PIA07899/PIA07899~orig.jpg) — 侧向看的旋涡星系，一条暗尘带横在发亮的核心前，像一顶宽檐草帽。
+- [Cosmic Cliffs (Carina)｜船底座星云·宇宙峭壁](https://images-assets.nasa.gov/image/carina_nebula/carina_nebula~orig.png) — 韦伯首图里的「宇宙悬崖」，恒星在气体峭壁后一个接一个破壳而出。
+- [Eagle Nebula｜鹰状星云（创生之柱）](https://images-assets.nasa.gov/image/PIA25433/PIA25433~orig.jpg) — 鹰状星云里正在诞生恒星的气体巨柱，哈勃和韦伯都拍过，最出圈的宇宙名场面。
+- [Orion Nebula｜猎户座大星云 M42](https://images-assets.nasa.gov/image/PIA25434/PIA25434~orig.jpg) — 肉眼可见最近的恒星育婴房，冬夜天空里最亮的那团雾，望远镜下是一锅发光的星尘。
+- [Tarantula Nebula｜蜘蛛星云](https://images-assets.nasa.gov/image/PIA14415/PIA14415~orig.jpg) — 大麦哲伦云里最大的恒星育婴房，恒星密度高到能把周围照成白天。
+- [Lagoon Nebula｜礁湖星云 M8](https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001955/GSFC_20171208_Archive_e001955~orig.jpg) — 人马座方向的恒星托儿所，哈勃拍过它里头像山脉一样的气体褶皱。
+- [Whirlpool Galaxy｜涡状星系 M51](https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001925/GSFC_20171208_Archive_e001925~orig.jpg) — 教科书般的旋臂星系，正被旁边小星系扯出一道潮汐桥。
+- [Triangulum Galaxy｜三角座星系 M33](https://images-assets.nasa.gov/image/PIA11969/PIA11969~orig.jpg) — 本星系群第三大旋涡星系，赫歇尔多波段拼出的细腻旋臂。
 - [Pinwheel Galaxy｜风车星系 M101](https://images-assets.nasa.gov/image/PIA14403/PIA14403~orig.jpg) — 正面朝我们的巨型旋臂星系，结构松散得像小孩画的风车。
-- [Pleiades｜昴星团（七姊妹）](https://images-assets.nasa.gov/image/PIA09262/PIA09262~orig.jpg) — 肉眼可见的蓝色星团，希腊神话里擎天巨人的七个女儿，被尘埃反射出蓝光。
+- [Horsehead Nebula｜马头星云](https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001518/GSFC_20171208_Archive_e001518~orig.jpg) — 猎户座边上一团暗色气体，被背后红光衬出马头剪影，是天文摄影的招牌。
+- [Rosette Nebula｜玫瑰星云](https://images-assets.nasa.gov/image/PIA13126/PIA13126~orig.jpg) — 麒麟座里一朵巨大的玫瑰状发射星云，中心星团把周围气体吹成了花瓣。
+- [Veil Nebula｜面纱星云（天鹅座环）](https://images-assets.nasa.gov/image/PIA15415/PIA15415~orig.jpg) — 一颗恒星生命末期炸出的细丝状残骸，横跨天鹅座，像被风吹散的轻纱。
+- [Bubble Nebula｜气泡星云](https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002039/GSFC_20171208_Archive_e002039~orig.jpg) — 一颗炽热年轻恒星吹出的巨型气体泡，泡壁上是刚诞生的新星。
+- [Trifid Nebula｜三叶星云](https://images-assets.nasa.gov/image/PIA17834/PIA17834~orig.jpg) — 三道暗尘埃把发光气体分成三瓣，哈勃拍过它里层的恒星喷泉。
 
 ## 深空影像 / Deep-Space Imagery
 
@@ -48,9 +49,6 @@
 - [Webb Telescope](https://webbtelescope.org/) — JWST 官网，红外视角下的早期宇宙，发布页常驻最新深空大片。
 - [HubbleSite Image Gallery](https://hubblesite.org/images) — 哈勃任务官网图库，检索友好，按任务/天体分类。
 - [Astronomy Picture of the Day｜每日天文图 APOD](https://apod.nasa.gov/apod/astropix.html) — NASA 每天一张宇宙图配一段解读，二十多年没断过，是最好的入门入口。
-- [Triangulum Galaxy｜三角座星系 M33](https://images-assets.nasa.gov/image/PIA25165/PIA25165~orig.jpg) — 本星系群第三大旋涡星系，赫歇尔多波段拼出的细腻旋臂。
-- [Monkey Head Nebula｜猴头星云 NGC 2174](https://images-assets.nasa.gov/image/PIA19836/PIA19836~orig.jpg) — 猎户座方向的恒星育婴房，电离氢勾出一张抬头远望的猴脸。
-- [Blue Ring Nebula｜蓝环星云](https://images-assets.nasa.gov/image/PIA23867/PIA23867~orig.jpg) — 罕见的一对恒星合并残骸，一圈蓝色物质环几乎正对着我们喷出来。
 
 ## NASA 官方资源源 / Official NASA Sources
 
@@ -97,8 +95,8 @@ A curated list of NASA's public-domain stars, nebulae, deep-space imagery, and t
 
 ## What's inside
 
-- **Featured Nebulae** — Pillars of Creation, Orion, Crab, Carina, Helix, Ring, Horsehead, Lagoon, Tarantula, Butterfly, California, Thor's Helmet.
-- **Deep-Space Imagery** — official Hubble / Webb galleries plus landmark pictures (Triangulum, Monkey Head, Blue Ring).
+- **Featured Imagery** — Andromeda, Sombrero, Cosmic Cliffs (Carina), Eagle Pillars, Orion, Tarantula, Lagoon, Whirlpool, Triangulum, Pinwheel, Horsehead, Rosette, Veil, Bubble, Trifid.
+- **Deep-Space Imagery** — official Hubble / Webb galleries plus the NASA Image and Video Library.
 - **Official NASA Sources** — Image & Video Library, NASA Science, STScI, ESA/Hubble, Chandra, SVS.
 - **Cosmic Image Tools** — Images API, api.nasa.gov, Stellarium, WorldWide Telescope, SkyView.
 - **Yue's Originals** — a minimal NASA APOD desktop slideshow widget ([desktop/](desktop/)).
