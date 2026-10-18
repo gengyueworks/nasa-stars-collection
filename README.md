@@ -968,6 +968,12 @@
 - [WorldWide Telescope](https://worldwidetelescope.org/) — 把真实望远镜数据变成可漫游的星空，适合当桌面背景或做讲解。
 - [SkyView (NASA/GSFC)](https://skyview.gsfc.nasa.gov/) — 输入坐标就能生成多波段星空图，光学、X 射线、射电一键叠加。
 
+> **实战笔记 / Field Notes**（每日自动上新流水线沉淀，三条都是公有领域的工程经验）：
+>
+> 1. **APOD 免费密钥会限流**：`DEMO_KEY` 约 30 次/小时/IP、50 次/天/IP。做每日自动化要么申请一个免费专属 key，要么把元数据按日期缓存——稳态每天一到两次调用足够，重试与降级路径零消耗。
+> 2. **全屏 cover 放大的清晰度判据是「短边像素」，不是「文件体积」**：以 iPad 2732px 短边屏加 1.08 倍 Ken Burns 余量推导，图源短边 ≥2370px 才不发虚。码率（B/px）会误杀纯黑夜空好图、放过被硬放大的低清图，不能当判据。
+> 3. **API 返回的天体标题可能失真，要以图像内容鉴定为准**：实测遇到过把 JWST 拍摄的 IC 5148（轮胎星云）标成 "NASA Science" 的情况。入库前看图核对一眼，比信字符串可靠。
+
 ## 悦的原创 / Yue's Originals
 
 - [悦的 NASA 星辰桌面｜NASA Stars Desktop](desktop/) — 一个把 NASA 每日天文图做成**桌面幻灯片**的极简 widget：图大字少、自动轮播、可键盘翻页。就是本仓库想解决的「放着好看」那件事。
@@ -995,7 +1001,7 @@ A curated list of NASA's public-domain stars, nebulae, galaxies, planets, and de
 
 - **APOD Bilingual Gallery (882 entries)** — sourced from NASA's Astronomy Picture of the Day public archive; creepy, trypophobia-triggering, and video entries removed.
 - **Official NASA Sources** — Image & Video Library, NASA Science, STScI, ESA/Hubble, Chandra, SVS.
-- **Cosmic Image Tools** — Images API, api.nasa.gov, Stellarium, WorldWide Telescope, SkyView.
+- **Cosmic Image Tools** — Images API, api.nasa.gov, Stellarium, WorldWide Telescope, SkyView, plus field notes on API rate limits & date caching, cover-scale clarity math (short edge ≥2370px, not bytes-per-pixel), and why API titles should be verified against the image itself.
 - **Yue's Originals** — a minimal NASA APOD desktop slideshow widget ([desktop/](desktop/)).
 
 ## License
