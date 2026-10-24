@@ -1,7 +1,15 @@
 # NASA 星辰星云精选合集 · nasa-stars-collection
 
+> NASA 每天发一张天文图（APOD），积攒了几十年，上万张。我翻过很多次，每次都被震撼，然后关掉页面，下次再找又不知道从哪开始。
+>
+> 问题是：好图太多，但没人帮你筛过。有些图壮丽得让你忘记自己多渺小，有些图密密麻麻看了不舒服。英文说明写得好，但对中文读者不够友好。
+>
+> 所以我做了这个合集。按主题分类，按"壮丽、色彩明快、构图有气势"的口味筛选，每条加了中文图说。差异化在双语——英文标题加中文解说，打开就是那张具体的图，不用再自己翻。
+
+---
+
 > 一个精选的 NASA 公开星空 / 星云 / 深空影像与工具合集（awesome-list 风格精选清单）。
-> 每条 = **英文标题 + 中文图说 + 链接**；影像全部来自 NASA 每日天文图（APOD）公开档案，**双语图说**。
+> 每条 = **英文标题 + 中文图说 + 链接**；影像全部来自 NASA 每日天文图（APOD）公开档案，按壮丽的口味筛选、剔除了密集与惊悚类画面。差异化护城河是**双语图说**。
 
 [English version ↓](#english)
 
@@ -9,18 +17,28 @@
 
 ## 这是什么
 
-把 NASA 那些「看一眼就忘了自己很渺小」的图，按主题收在一起：
+把 NASA 那些「看一眼就忘了自己很渺小」的图，按主题收在一起：星云、星系、行星、天空奇观，再加官方资源源、影像工具和一点我自己的原创。所有 NASA 影像都是**公有领域（Public Domain）**，放心用、放心存，只要注明来源 NASA。
 
-星云、星系、行星、天空奇观，再加官方资源源、影像工具和一点我自己的原创。
+本合集的图说来自 APOD 双语档案（英文标题 + 中文解说），并按「壮丽、色彩明快、构图有气势」的口味做了筛选，去掉了密集星团与惊悚感的画面。
 
-所有 NASA 影像都是**公有领域（Public Domain）**，放心用、放心存，只要注明来源 NASA。
+---
 
-本合集的图说来自 APOD 双语档案（英文标题 + 中文解说），并按「壮丽、色彩明快、构图有气势」的口味做了筛选。
+## 🌌 星辰深处的故事长卷（The Cosmic Stories）
 
-我永远爱星辰大海。
+> 不再只是一句图说。每一片光年尘埃背后，都有物理现场、人类观测史与通往绘本与周边的深度叙事。
+
+- 📖 **[进入故事总览库与色彩节奏谱 · 00-INDEX.md](stories/00-INDEX.md)**
+- 🌈 **[火星暮色彩虹云 · 好奇号在荒原上空的珍珠羽毛](stories/02-mars-curiosity-rainbow-clouds/index.zh.md)** ([English](stories/02-mars-curiosity-rainbow-clouds/index.en.md))
+- 🦅 **[海鸥星云 · 掠过银河平面的两百光年赤色羽翼](stories/01-seagull-nebula-ic2177/index.zh.md)** ([English](stories/01-seagull-nebula-ic2177/index.en.md))
+- ❓ **[宇宙大问号 · 仙王座深处无声悬挂的三千光年诘问](stories/03-cosmic-question-mark-ngc7822/index.zh.md)** ([English](stories/03-cosmic-question-mark-ngc7822/index.en.md))
+- ❄️ **[雪茄星系 M82 · 千万光年外的冷冽烟斗与赤红星暴喷流](stories/04-cigar-galaxy-m82/index.zh.md)** ([English](stories/04-cigar-galaxy-m82/index.en.md))
+- 🌹 **[玫瑰星云 · 宇宙在五千光年外悄悄盛开的永恒花瓣](stories/08-rosette-nebula-ngc2237/index.zh.md)** ([English](stories/08-rosette-nebula-ngc2237/index.en.md))
+
+---
 
 ## 目录
 
+- [星辰深处的故事长卷（中英双语深度特稿）](#-星辰深处的故事长卷the-cosmic-stories)
 - [APOD 双语图库（882 条）](#apod-双语图库882bilingual)
 - [星系 / Galaxies](#星系---galaxies)
 - [星云 / Nebulae](#星云---nebulae)
@@ -968,12 +986,6 @@
 - [WorldWide Telescope](https://worldwidetelescope.org/) — 把真实望远镜数据变成可漫游的星空，适合当桌面背景或做讲解。
 - [SkyView (NASA/GSFC)](https://skyview.gsfc.nasa.gov/) — 输入坐标就能生成多波段星空图，光学、X 射线、射电一键叠加。
 
-> **实战笔记 / Field Notes**（每日自动上新流水线沉淀，三条都是公有领域的工程经验）：
->
-> 1. **APOD 免费密钥会限流**：`DEMO_KEY` 约 30 次/小时/IP、50 次/天/IP。做每日自动化要么申请一个免费专属 key，要么把元数据按日期缓存——稳态每天一到两次调用足够，重试与降级路径零消耗。
-> 2. **全屏 cover 放大的清晰度判据是「短边像素」，不是「文件体积」**：以 iPad 2732px 短边屏加 1.08 倍 Ken Burns 余量推导，图源短边 ≥2370px 才不发虚。码率（B/px）会误杀纯黑夜空好图、放过被硬放大的低清图，不能当判据。
-> 3. **API 返回的天体标题可能失真，要以图像内容鉴定为准**：实测遇到过把 JWST 拍摄的 IC 5148（轮胎星云）标成 "NASA Science" 的情况。入库前看图核对一眼，比信字符串可靠。
-
 ## 悦的原创 / Yue's Originals
 
 - [悦的 NASA 星辰桌面｜NASA Stars Desktop](desktop/) — 一个把 NASA 每日天文图做成**桌面幻灯片**的极简 widget：图大字少、自动轮播、可键盘翻页。就是本仓库想解决的「放着好看」那件事。
@@ -1001,7 +1013,7 @@ A curated list of NASA's public-domain stars, nebulae, galaxies, planets, and de
 
 - **APOD Bilingual Gallery (882 entries)** — sourced from NASA's Astronomy Picture of the Day public archive; creepy, trypophobia-triggering, and video entries removed.
 - **Official NASA Sources** — Image & Video Library, NASA Science, STScI, ESA/Hubble, Chandra, SVS.
-- **Cosmic Image Tools** — Images API, api.nasa.gov, Stellarium, WorldWide Telescope, SkyView, plus field notes on API rate limits & date caching, cover-scale clarity math (short edge ≥2370px, not bytes-per-pixel), and why API titles should be verified against the image itself.
+- **Cosmic Image Tools** — Images API, api.nasa.gov, Stellarium, WorldWide Telescope, SkyView.
 - **Yue's Originals** — a minimal NASA APOD desktop slideshow widget ([desktop/](desktop/)).
 
 ## License
